@@ -1,0 +1,17 @@
+{% load wagtailcore_tags wagtailimages_tags  %}
+
+<section class="projects bg-white ">
+
+    <div class="container mx-auto max-w-6xl  py-4">
+        <h2 class="text-2xl font-bold text-center ">Projects</h2>
+        <div
+            class="box-skills grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3   gap-2 md:gap-4 lg:gap-8 justify-center  py-5 ">
+            {% for project in page.get_projects %}
+                {% include 'project/_partail/project_card.html' %}
+            {% endfor %}
+        </div>
+        <div class="load-more text-center">
+            <a href="{% slugurl 'projects' %}" class="link text-primary font-bold no-underline hover:text-blue-600 ">See more</a>
+        </div>
+    </div>
+</section>

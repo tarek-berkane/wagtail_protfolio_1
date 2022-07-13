@@ -1,0 +1,28 @@
+{% load wagtailimages_tags wagtailcore_tags %}
+{% image project.specific.show_image width-300 as tmp_photo %}
+
+<a href="{% pageurl project %}"
+class="card card-side md:flex-col   bg-base-100   top-0 hover:-top-2 transition-all duration-150">
+<figure><img class=" h-full object-cover w-32 md:w-full md:h-60"
+        src="{{tmp_photo.url}}"
+        alt="Shoes" /></figure>
+<div class="card-body py-2 px-3 space-y-0 gap-1">
+    <h2 class="card-title py-0 mb-0">
+        {{project.title}}
+    </h2>
+    <p class="text-sm">If a dog chews shoes whose shoes does he choose?</p>
+    <div class="card-actions justify-start">
+        {% if project.specific.languages.first %}
+            {% with project.specific.languages.first as tag %}
+                <div class="badge badge-outline  bg-sky-400  border-sky-400 text-white">{{tag.text}}</div>
+            {% endwith %}
+        {% endif %}
+
+        {% if project.project.specific.frameworks.first %}
+            {% with project.project.specific.frameworks.first as tag %}
+                <div class="badge badge-outline  bg-sky-400  border-sky-400 text-white">{{tag.text}}</div>
+            {% endwith %}
+        {% endif %}
+    </div>
+</div>
+</a>

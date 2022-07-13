@@ -1,0 +1,12 @@
+
+{% with page.project_type.first as project_type %}
+    {% if project_type %}
+    <a href="#" class="badge bg-green-700 border-green-700 hover:bg-green-900 text-white ">{{project_type}}</a>
+    {% endif %}
+{% endwith %}
+
+{% with page.frameworks.first as framework %}
+    {% if framework %}
+    <a href="#" class="badge bg-purple-700 border-purple-700 hover:bg-purple-900 text-white ">{{framework}}</a>
+    {% endif %}
+{% endwith %}

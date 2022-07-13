@@ -1,0 +1,7 @@
+{% if self.type == 'h2' %}
+<h2 class="text-2xl font-semibold mt-4 mb-1">{{self.title}}</h2>
+{% elif self.type == 'h3' %}
+<h3 class="text-xl font-semibold mb-1">{{self.title}}</h3>
+{% elif self.type == 'h4' %}
+<h4 class="text-base font-semibold py-4 mb-1">{{self.title}}</h4>
+{% endif %}

@@ -1,0 +1,102 @@
+{% load static wagtailcore_tags wagtailuserbar  %}
+
+
+<!DOCTYPE html>
+<html class="no-js" >
+<head>
+    <meta charset="utf-8" />
+
+    <title>
+        {% block title %}
+        {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+        {% endblock %}
+        {% block title_suffix %}
+        {% wagtail_site as current_site %}
+        {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
+        {% endblock %}
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {% if page.search_description %}
+        <meta name="description" content="{{ page.search_description }}">
+    {% endif %}
+
+    <link rel="icon" href="{% static 'images/favicon.svg' %}">
+
+
+    
+    
+    {% comment %} <meta name="yandex-verification" content="" /> {% endcomment %}
+    
+
+    {% block extraSeo %}
+        {% comment %} SEO HELPER  {% endcomment %}
+    {% endblock extraSeo %}
+    
+
+    {# Global stylesheets #}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/output.css' %}">
+
+    {% comment %} CSS {% endcomment %}
+    {% if  debug %}
+        {# Local css #}    
+        {# libraries css #}    
+        {% comment %} <link rel="stylesheet" href="{% static 'css/vendor/tabler.rtl.min.css' %}"> {% endcomment %}
+        {# Fonts #}
+        {% comment %} <link href="{% static 'fonts/almarai/Almarai-Regular.ttf' %}" rel="stylesheet"> {% endcomment %}
+    {% else %}
+        {% comment %} <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler.rtl.min.css">  {% endcomment %}
+    {% endif %}
+    
+    
+    {% block extra_css %}
+    {% comment %} Extra css {% endcomment %}
+    {% endblock %}
+</head>
+{% block extra_style %}
+{% endblock extra_style %}
+
+<body class="bg-gray-100 overflow-x-hidden	 {% block body_class %}{% endblock %}" data-theme="corporate">
+    {% wagtailuserbar %}
+
+    {# Global Content Area #}
+    {% block header %}
+        {% include "_partial/header.html" %}
+    {% endblock header %}
+
+    {% block body %}
+    {% endblock body %}
+    
+    {% block footer %}
+        {% include "_partial/footer.html" %}
+    {% endblock footer %}
+    {# Local javascript #}
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+    {# Global javascript #}
+    {% if debug %}
+        {% comment %} <script src="{% static 'js/vendor/tabler.min.js' %}"></script> {% endcomment %}
+    {% else %}
+        {% comment %} <script src="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/js/tabler.min.js"></script>  {% endcomment %}
+        {% comment %} ================================ {% endcomment %}
+        {% comment %} GOOGLE ANALYTICS {% endcomment %}
+        {% comment %} <script async src="https://www.googletagmanager.com/gtag/js?id=NUMBER-HERE"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+    
+            gtag('config', 'NUMBER-HERE');
+        </script>  {% endcomment %}
+    {% endif %}
+        {% comment %} ================================ {% endcomment %}
+
+    {% block extra_js %}
+    {# Override this in templates to add extra javascript #}
+    {% endblock %}
+</body>
+
+</html>

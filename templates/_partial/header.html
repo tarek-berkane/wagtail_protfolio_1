@@ -1,0 +1,29 @@
+{% load wagtailcore_tags %}
+
+<header>
+    <div class="navbar bg-base-100 flex-col md:flex-row px-0 md:px-2">
+        <div class="mobile_area flex-1 w-full">
+            <a href="{% slugurl 'home' %}" class="btn btn-ghost normal-case text-xl">Codingdz</a>
+            <div class="flex-none ml-auto md:hidden">
+                <div class="flex-none">
+                    <button class="btn btn-square btn-ghost" onclick="toggle_menu();">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            class="inline-block w-5 h-5 stroke-current">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+        <div id="header-menu" class="desktop_area w-full bg-gray-100 md:bg-base-100 md:w-fit header-menu-hidden">
+            <ul class="menu menu-vertical md:menu-horizontal  w-full ">
+                <li><a href="{% slugurl 'home' %}" class="active" >Home</a></li>
+                <li><a href="{% slugurl 'projects' %}" >Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About me</a></li>
+            </ul>
+        </div>
+    </div>
+</header>

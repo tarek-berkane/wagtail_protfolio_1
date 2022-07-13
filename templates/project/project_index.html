@@ -1,0 +1,96 @@
+{% extends '_base.html' %}
+{% load wagtailimages_tags wagtailcore_tags %}
+
+{% block extra_css %}
+{% endblock extra_css %}
+
+{% block body %}
+<section class="py-3 min-h-screen">
+    <div class="max-w-7xl mx-auto ">
+        <div class="grid grid-cols-8 gap-2 ">
+                <div class="col-span-8 md:col-span-3 xl:col-span-2">
+                <div class="px-3  md:pb-3">
+                    <form action="" method="get">
+                        <h2 class="text-lg font-bold md:text-xl">Search</h2>
+                        <div class="flex space-x-2 mb-2 ">
+                            {% comment %} <input type="text" class="input input-sm input-bordered border-primary w-full "> {% endcomment %}
+                            {{form.text}}
+                            <span class="btn btn-sm btn-primary md:hidden" onclick="toggle_search_filter_new(this);">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="icon icon-tabler icon-tabler-filter stroke-white w-8 h-8 " width="44"
+                                    height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path
+                                        d="M5.5 5h13a1 1 0 0 1 .5 1.5l-5 5.5l0 7l-4 -3l0 -4l-5 -5.5a1 1 0 0 1 .5 -1.5" />
+                                </svg>
+                            </span>
+                        </div>
+
+                        <div id="search-parameters" class="p-2 bg-base-200 rounded-md mb-2 hidden md:block md:bg-transparent ">
+                             {% comment %} <h3 class=" font-semibold ">Sort by</h3>
+                            <div class="radio-group flex md:flex-col justify-around ">
+                            
+                         
+                               <div class="radio-item flex items-center mb-1">
+                                    <input type="radio" name="radio-2" class="radio radio-sm radio-primary"
+                                        checked />
+                                    <label class="inline-block ml-2  text-base" for="radio">Date</label>
+                                </div>
+                                <div class="radio-item flex items-center mb-1">
+                                    <input type="radio" name="radio-2" class="radio radio-sm radio-primary" />
+                                    <label class="inline-block ml-2  text-base" for="radio">Popularty</label>
+                                </div>
+                                <div class="radio-item flex items-center mb-1">
+                                    <input type="radio" name="radio-2" class="radio radio-sm radio-primary" />
+                                    <label class="inline-block ml-2  text-base" for="radio">Trend</label>
+                                </div> 
+                            </div>{% endcomment %}
+
+                            <h3 class="font-semibold mt-1 ">Sort type</h3>
+                            <div class="radio-group w-full ">
+                                {{form.sort_type}}
+                            </div>
+
+
+                            <h3 class="font-semibold mt-1 ">Project language</h3>
+                            <div class="radio-group w-full ">
+                                {{form.project_language}}
+                            </div>
+
+                            <h3 class="font-semibold mt-1">Project Framework</h3>
+                            <div class="radio-group ">
+                                {{form.project_framework}}
+
+                            </div>
+
+                            <h3 class="font-semibold mt-1">Project Categry</h3>
+                            <div class="radio-group ">
+                                {{form.project_type}}
+                            </div>
+                        </div>
+
+                        <div class="submit-btn-area flex">
+                            <input class="btn btn-primary btn-sm ml-auto " type="submit" value="Search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-span-8  md:col-span-5  xl:col-span-6">
+                <div class="">
+                    <div
+                        class="box-skills grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3   gap-2 md:gap-4 lg:gap-4 justify-center   ">
+                        {% for project in page.object_list %}
+                            {% include 'project/_partail/project_card.html' %}
+                        {% endfor %}
+                       
+                    </div>
+                    {% include 'project/_partail/pagination.html' %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock body %}

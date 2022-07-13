@@ -1,0 +1,5 @@
+SECRET_KEY_VALUE=PUT-YOUR-SECRET-KEY-HERE
+
+PUBLIC_STATIC_PATH=/cpanel-path/to/public_html/
+DATABASE_PATH=cpanel-path/to/database
+

@@ -1,0 +1,77 @@
+<div class="bio">
+
+<h2 class="text-xl font-bold ">Project information</h2>
+{% if page.github_link %}
+   <p class="mb-2"><strong>Github:</strong> <a href="{{page.github_link}}" class="link text-blue-500" target="_blank" rel="noopener noreferrer">link</a></p>
+{% endif %}
+
+{% if page.demo_link %}
+   <p class="mb-2"><strong>Demo:</strong> <a href="{{page.demo_link}}" class="link text-blue-500" rel="noopener noreferrer">link</a></p>
+{% endif %}
+{% with page.project_type.all as  project_type   %}
+    {% if project_type %}
+        <h3 class='text-base  font-bold'>Project type</h3>
+        <ul class='list-disc pl-6 mb-3'>
+            {% for project in project_type %}
+                <li> {{project}} </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+{% with page.languages.all as  languages   %}
+    {% if languages %}
+        <h3 class='text-base  font-bold'>Language</h3>
+        <ul class='list-disc pl-6 mb-3'>
+            {% for language in languages %}
+                <li> {{language}} </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+{% with page.frameworks.all as  frameworks   %}
+{% if frameworks %}
+    <h3 class='text-base  font-bold'>Frameworks</h3>
+    <ul class='list-disc pl-6 mb-3'>
+        {% for framework in frameworks %}
+            <li> {{framework}} </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endwith %}
+
+{% with page.libraries.all as  libraries   %}
+{% if libraries %}
+<h3 class='text-base  font-bold'>Libraries</h3>
+<ul class='list-disc pl-6 mb-3'>
+    {% for librarie in libraries %}
+        <li> {{librarie}} </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+{% with page.databases.all as  databases   %}
+{% if databases %}
+<h3 class='text-base  font-bold'>Databases</h3>
+<ul class='list-disc pl-6 mb-3'>
+{% for database in databases %}
+    <li> {{database}} </li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+{% with page.others.all as  others   %}
+{% if others %}
+<h3 class='text-base  font-bold'>Others</h3>
+<ul class='list-disc pl-6 mb-3'>
+    {% for other in others %}
+        <li> {{other}} </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+</div>

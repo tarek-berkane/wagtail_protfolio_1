@@ -1,0 +1,14 @@
+<div class="btn-group justify-center mt-4">
+    {% if page.has_previous %}
+        <a class="btn btn-sm" href="{{parameters_url}}p={{page.previous_page_number}}">«</a>
+    {% else %}
+        <button class="btn btn-sm btn-disabled">«</button>
+    {% endif %}
+    <button class="btn btn-sm text-blue-500">Page {{page.number}}</button>
+
+    {% if page.has_next %}
+    <a class="btn btn-sm" href="{{parameters_url}}p={{page.next_page_number}}">»</a>
+    {% else %}
+        <button class="btn btn-sm btn-disabled">»</button>
+    {% endif %}
+</div>

@@ -1,0 +1,22 @@
+{% load static wagtailimages_tags %}
+
+<section class="skills ">
+    <div class="container mx-auto my-0 max-w-6xl px-3 py-8">
+        <h2 class="text-xl font-bold text-center ">My skills</h2>
+        <div class="skills-slider box-skills  py-8 ">
+            {% for skill in page.get_skills %}
+                {% image skill.feed_image width-96 as tmp_photo %}
+
+                <a href="{{skill.get_absolute_url}}"
+                    class="avatar mx-5 carousel-item text-center md:grayscale hover:grayscale-0  transition-all duration-100 group">
+                    <div class="w-24    transition-all duration-100  p-2">
+                        <img src="{{tmp_photo.url}}" />
+                    </div>
+                    <p class="text-xl  font-sans font-bold text-gray-400 group-hover:text-gray-700 transition-colors">
+                        {{skill.text}}</p>
+                </a>
+            
+            {% endfor %}
+        </div>
+    </div>
+</section>
