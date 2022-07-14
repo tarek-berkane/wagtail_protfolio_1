@@ -62,6 +62,11 @@ class ProjectIndex(RoutablePageMixin, Page):
             context_overrides=context,
         )
 
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["page_section"] = "projects"
+        return context
+
 
 class Project(Page):
     template = "project/project.html"
@@ -168,3 +173,8 @@ class Project(Page):
             query = query.specific().filter(frameworks__in=project_framework)
 
         return query
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["page_section"] = "projects"
+        return context

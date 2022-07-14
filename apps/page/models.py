@@ -54,9 +54,15 @@ class Home(Page):
     def get_projects(self):
         return get_projects()
 
+    def get_context(self, request, *args, **kwargs):
+        context =  super().get_context(request, *args, **kwargs)
+        context['page_section'] = 'home'
+        return context
 
 class About(Page):
-    sub_title = models.CharField(max_length=200)
+
+    salutation = models.CharField(max_length=255)
+    sub_title = models.CharField(max_length=255)
     description = models.TextField()
     auth_image = models.ForeignKey(
         "wagtailimages.Image",
@@ -77,6 +83,7 @@ class About(Page):
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
+                FieldPanel("salutation"),
                 FieldPanel("sub_title"),
                 FieldPanel("description"),
                 ImageChooserPanel("auth_image"),
@@ -85,3 +92,9 @@ class About(Page):
         ),
         StreamFieldPanel("content"),
     ]
+
+
+    def get_context(self, request, *args, **kwargs):
+        context =  super().get_context(request, *args, **kwargs)
+        context['page_section'] = 'about'
+        return context
