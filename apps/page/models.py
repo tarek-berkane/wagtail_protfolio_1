@@ -4,10 +4,20 @@ from wagtail.core.models import Page
 from wagtail.admin.edit_handlers import PageChooserPanel, FieldPanel
 from wagtail.documents.edit_handlers import DocumentChooserPanel
 
+# panels
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, MultiFieldPanel
+from wagtail.images.edit_handlers import ImageChooserPanel
+
+# blocks
+import apps.blocks as project_blocks
+from wagtail.core.blocks import RichTextBlock
+
+# fileds
+from wagtail.core.fields import StreamField
+
+# services
 from apps.category.services import get_skills
 from apps.project.services import get_projects
-
-# Create your models here.
 
 
 class Home(Page):
@@ -46,4 +56,32 @@ class Home(Page):
 
 
 class About(Page):
-    text = models.CharField(max_length=200)
+    sub_title = models.CharField(max_length=200)
+    description = models.TextField()
+    auth_image = models.ForeignKey(
+        "wagtailimages.Image",
+        on_delete=models.SET_NULL,
+        related_name="+",
+        null=True,
+        blank=True,
+    )
+
+    content = StreamField(
+        [
+            ("header", project_blocks.Header()),
+            ("Rich_text", RichTextBlock()),
+            ("image", project_blocks.Image()),
+        ]
+    )
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel("sub_title"),
+                FieldPanel("description"),
+                ImageChooserPanel("auth_image"),
+            ],
+            heading="Main",
+        ),
+        StreamFieldPanel("content"),
+    ]

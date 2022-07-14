@@ -1,11 +1,15 @@
 my_env/
+**/__pycache__/
 */__pycache__/
 */settings/__pycache__/
 */migrations/__pycache__/
 */migrations/00*
+/raw-template-media
+
 db.sqlite3
 log/*
 media/*
 production.sqlite3
 .env
 _todo.md
+

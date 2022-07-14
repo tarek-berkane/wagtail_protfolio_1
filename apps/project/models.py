@@ -1,6 +1,5 @@
 from django.db import models
 from django.http import HttpRequest
-from django.core.paginator import Paginator
 
 from wagtail.admin.edit_handlers import (
     TabbedInterface,
@@ -10,16 +9,18 @@ from wagtail.admin.edit_handlers import (
     MultiFieldPanel,
 )
 from wagtail.core.models import Page
-from wagtail.core.blocks import RichTextBlock
 from wagtail.core.fields import StreamField
-from wagtail.images.edit_handlers import ImageChooserPanel
-from wagtail.contrib.routable_page.models import RoutablePageMixin, route
-
 from modelcluster.fields import ParentalManyToManyField
-from apps.category.services import get_frameworks, get_languages, get_project_types
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.images.edit_handlers import ImageChooserPanel
 
-import apps.project.blocks as project_blocks
+
 from apps.project.forms import ProjectForm
+from apps.project.utils import build_url_query, paginate
+
+# blocks
+import apps.blocks as project_blocks
+from wagtail.core.blocks import RichTextBlock
 
 
 class ProjectIndex(RoutablePageMixin, Page):
@@ -34,89 +35,37 @@ class ProjectIndex(RoutablePageMixin, Page):
     # ROUTING
     @route(r"^$")  # will override the default Page serving mechanism
     def current_events(self, request: HttpRequest):
-        queryset = None
+
         if request.GET:
             form = ProjectForm(request.GET)
             if form.is_valid():
-                queryset = self.project_search(**form.cleaned_data)
+                queryset = Project.project_search(**form.cleaned_data)
             else:
-                queryset = self.project_search()
-
+                queryset = Project.project_search()
         else:
             form = ProjectForm()
-            queryset = self.project_search()
+            queryset = Project.project_search()
 
         if request.GET.get("p"):
             page_number = request.GET.get("p")
-            page = self.paginate(queryset, page_number)
+            page = paginate(queryset, page_number)
         else:
-            page = self.paginate(queryset)
+            page = paginate(queryset)
 
         context = {}
         context["form"] = form
         context["page"] = page
-        context["parameters_url"] = self.build_url_query(**request.GET)
+        context["parameters_url"] = build_url_query(**request.GET)
 
         return self.render(
             request,
             context_overrides=context,
         )
 
-    # OTHER METHODS
-    def project_search(
-        self,
-        text: str = None,
-        sort_type: str = None,
-        project_type: str = None,
-        project_language: str = None,
-        project_framework: str = None,
-        **kwargs,
-    ):
 
-        query = self.get_children().live()
-
-        if text:
-            query = query.filter(title__contains=text)
-
-        return query
-
-    def build_url_query(
-        self,
-        text: str = None,
-        sort_type: str = None,
-        project_type: str = None,
-        project_language: str = None,
-        project_framework: str = None,
-        **kwargs,
-    ):
-
-        parameters = "?"
-
-        if text:
-            parameters = parameters + f"text={text[0]}&"
-
-        if sort_type:
-            parameters = parameters + f"sort_type={sort_type[0]}&"
-
-        if project_type:
-            parameters = parameters + f"project_type={project_type[0]}&"
-
-        if project_language:
-            parameters = parameters + f"project_language={project_language[0]}&"
-
-        if project_framework:
-            parameters = parameters + f"project_framework={project_framework[0]}&"
-
-        return parameters
-
-    def paginate(self, queryset, page_number=1):
-        result_paginated = Paginator(queryset, 9)
-        page = result_paginated.get_page(page_number)
-        return page
-
-
-# Create your models here.
 class Project(Page):
+    template = "project/project.html"
+
     parent_page_types = [
         "project.ProjectIndex",
     ]
@@ -194,4 +143,28 @@ class Project(Page):
         ]
     )
 
-    template = "project/project.html"
+    @staticmethod
+    def project_search(
+        text: str = None,
+        sort_type: str = None,
+        project_type: str = None,
+        project_language: str = None,
+        project_framework: str = None,
+        **kwargs,
+    ):
+
+        query = Project.objects.live().specific()
+
+        if text:
+            query = query.filter(title__contains=text)
+
+        if project_type and project_type != "any":
+            query = query.specific().filter(project_type__in=project_type)
+
+        if project_language and project_language != "any":
+            query = query.specific().filter(languages__in=project_language)
+
+        if project_framework and project_framework != "any":
+            query = query.specific().filter(frameworks__in=project_framework)
+
+        return query
