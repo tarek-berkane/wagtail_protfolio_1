@@ -21,11 +21,11 @@ PUBLIC_DIR = env("PUBLIC_DIR")
 
 
 # STATIC
-STATIC_ROOT = os.path.join(PUBLIC_DIR, "raw-template-static")
-STATIC_URL = "portfolio/raw-template-static/"
+STATIC_ROOT = os.path.join(PUBLIC_DIR, "portfolio-static")
+STATIC_URL = "/portfolio-static/"
 # MEDIA
-MEDIA_ROOT = os.path.join(PUBLIC_DIR, "raw-template-media")
-MEDIA_URL = "portfolio/raw-template-media/"
+MEDIA_ROOT = os.path.join(PUBLIC_DIR, "portfolio-media")
+MEDIA_URL = "/portfolio-media/"
 
 # SSL
 SECURE_SSL_REDIRECT = True
