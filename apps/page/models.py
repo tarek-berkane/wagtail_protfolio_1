@@ -3,6 +3,7 @@ from django.db import models
 from wagtail.core.models import Page
 from wagtail.admin.edit_handlers import PageChooserPanel, FieldPanel
 from wagtail.documents.edit_handlers import DocumentChooserPanel
+from wagtail.contrib.settings.models import BaseSetting, register_setting
 
 # panels
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, MultiFieldPanel
@@ -18,6 +19,19 @@ from wagtail.core.fields import StreamField
 # services
 from apps.category.services import get_skills
 from apps.project.services import get_projects
+
+
+@register_setting
+class SocialMediaSettings(BaseSetting):
+    github = models.URLField(help_text="Your github page", blank=True, null=True)
+    linkedin = models.URLField(help_text="Your linkedin account", blank=True, null=True)
+    youtube = models.URLField(
+        help_text="Your youtube chanel",
+        blank=True,
+        null=True,
+    )
+    email = models.EmailField(blank=True, null=True)
+    phone_number = models.CharField(max_length=20, blank=True, null=True)
 
 
 class Home(Page):
@@ -55,12 +69,15 @@ class Home(Page):
         return get_projects()
 
     def get_context(self, request, *args, **kwargs):
-        context =  super().get_context(request, *args, **kwargs)
-        context['page_section'] = 'home'
+        context = super().get_context(request, *args, **kwargs)
+        context["page_section"] = "home"
         return context
 
+
 class About(Page):
-    parent_page_types = ['page.Home',]
+    parent_page_types = [
+        "page.Home",
+    ]
 
     salutation = models.CharField(max_length=255)
     sub_title = models.CharField(max_length=255)
@@ -94,8 +111,7 @@ class About(Page):
         StreamFieldPanel("content"),
     ]
 
-
     def get_context(self, request, *args, **kwargs):
-        context =  super().get_context(request, *args, **kwargs)
-        context['page_section'] = 'about'
+        context = super().get_context(request, *args, **kwargs)
+        context["page_section"] = "about"
         return context

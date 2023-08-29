@@ -1,20 +1,21 @@
 {% load static %}
+{% load wagtailcore_tags %}
+
 <section class="bg-white md:py-10 overflow-hidden">
     <div class="hero min-h-16 md:py-10   container mx-auto max-w-7xl">
         <div class="hero-content flex-col  lg:flex-row  w-full  md:max-h-80 md:px-10">
             <!-- <img src="https://api.lorem.space/image/movie?w=260&h=400" class="max-w-sm rounded-lg " /> -->
             <div class="grid grid-cols-1 md:grid-cols-2">
                 <div class="order-2	 md:order-1 flex flex-col justify-center">
-                    <h1 class="text-4xl md:text-5xl font-bold">Box Office News!</h1>
-                    <p class="py-6 mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-                        excepturi
-                        exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                    <h1 class="text-4xl md:text-5xl font-bold">{{page.title}}</h1>
+                    <p class="py-6 mb-5">
+                        {{page.description}}</p>
                     <div class="btns-area text-center md:text-start">
-                        <button class="btn   btn-primary">Download cv</button>
-                        <button class="btn btn-outline  btn-primary">Read more</button>
+                        <a href="{{page.cv_btn.url}}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Download cv</a>
+                        <a href="{% slugurl 'about' %}" class="btn btn-outline  btn-primary">Read more</a>
                     </div>
                 </div>
-                <img class="p-5" src="{% static 'images/page_show.png' %}" alt="">
+                <img class="p-5 md:order-1" src="{% static 'images/page_show.png' %}" alt="">
             </div>
         </div>
     </div>
