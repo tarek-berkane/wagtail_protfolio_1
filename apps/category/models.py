@@ -1,13 +1,9 @@
-from audioop import reverse
-from turtle import heading
 from django.db import models
 
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtail.snippets.models import register_snippet
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.core.models import Page, Site
-
-from modelcluster.fields import ParentalKey, ParentalManyToManyField
 
 
 class ProjectTag(models.Model):
