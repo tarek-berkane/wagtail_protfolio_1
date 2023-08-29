@@ -3,13 +3,13 @@ my_env/
 */__pycache__/
 */settings/__pycache__/
 */migrations/__pycache__/
-*/migrations/00*
+**/migrations/00*
 raw-template-media/
-
-db.sqlite3
-log/*
 media/*
-production.sqlite3
+
 .env
+db.sqlite3
+log/output.log
+production.sqlite3
 _todo.md
 

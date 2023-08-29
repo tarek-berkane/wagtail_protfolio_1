@@ -28,8 +28,7 @@
             <section id="content" class=" min-h-full col-span-6 md:col-span-4  md:px-4">
                 <article id="page-content">
                     {% image page.show_image width-800 as show_image %}
-                    <img src="{{show_image.url}}"
-                        class="bg-white max-h-96 md:rounded-md w-full mb-3 object-cover" />
+                    <img src="{{show_image.url}}" class="bg-white max-h-96 md:rounded-md w-full mb-3 object-cover" />
                     <!-- PROJECT TITLE -->
                     <div class="container px-3">
                         <h1 class="text-3xl md:text-4xl font-bold mb-2 py-0">{{page.title}}</h1>
@@ -37,7 +36,9 @@
 
                             <ul class="text-sm flex space-x-3">
                                 <li class="tooltip tooltip-bottom" data-tip="publish date"><span><i
-                                            class="fa-solid fa-calendar"></i></span> <span>{{page.first_published_at|date}}</span></li>
+                                            class="fa-solid fa-calendar"></i></span>
+                                    <span>{{page.first_published_at|date}}</span>
+                                </li>
                                 <li class="tooltip tooltip-bottom" data-tip="tags">
                                     <span><i class="fa-solid fa-tag"></i></span>
                                     <span>
@@ -56,9 +57,9 @@
                                 <h2 class="text-xl ">Project bio</h2>
                                 <div class="icon-area ml-auto">
                                     <svg xmlns="http://www.w3.org/2000/svg"
-                                        class="icon icon-tabler icon-tabler-plus text-xs w-5 h-5" width="44"
-                                        height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50"
-                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        class="icon icon-tabler icon-tabler-plus text-xs w-5 h-5" width="44" height="44"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                         <line x1="12" y1="5" x2="12" y2="19" />
                                         <line x1="5" y1="12" x2="19" y2="12" />
@@ -79,65 +80,40 @@
             <section class=" col-span-6 md:col-span-2 ">
                 <div class="devider"></div>
                 <div class="bg-white w-100 p-4 mb-5 rounded-md hidden md:block">
-                   {% include 'project/_partail/bio.html' %}
+                    {% include 'project/_partail/bio.html' %}
                 </div>
 
                 <div class=" w-100 py-4  mb-5 rounded-md">
                     <h2 class="text-xl font-bold pl-2 mb-2">Other projects</h2>
-                    <a href="#"
+                    {% for project in related_projects %}
+                    {% image project.specific.show_image width-150 as tmp_photo %}
+                    <a href="{% pageurl project %}"
                         class="card card-side    bg-base-100 shadow-xl  top-0 hover:-top-1 transition-all duration-150 rounded-none mb-3">
-                        <figure><img class=" h-full object-cover w-32 "
-                                src="https://cdn.dribbble.com/userupload/3000615/file/still-ed2c718a1f1b9c9d455f58047b52971e.png?compress=1&resize=320x240&vertical=top"
-                                alt="Shoes" /></figure>
+                        <figure><img class=" h-full object-cover w-32 " src="{{tmp_photo.url}}" alt="Shoes"
+                                style="object-fit: cover;" /></figure>
                         <div class="card-body py-2 px-3 space-y-0 gap-1">
                             <h2 class="card-title py-0 mb-0">
-                                Planet store
+                                {{project.title}}
                             </h2>
-                            <p class="text-sm">If a dog chews shoes whose shoes does he choose?</p>
+                            <p class="text-sm">{{project.short_description}}</p>
                             <div class="card-actions justify-start">
-                                <div class="badge badge-outline  bg-sky-400  border-sky-400 text-white">Flutter
+                                {% with page.frameworks.first as framework %}
+                                {% if framework %}
+                                <div class="badge badge-outline  bg-sky-400  border-sky-400 text-white">{{framework}}
                                 </div>
-                                <div class="badge badge-outline  bg-cyan-600  border-cyan-600 text-white">FastAPI
-                                </div>
+                                {% else %}
+                                <span class="mb-4"></span>
+                                {% endif %}
+                                {% endwith %}
+                                {% for language in page.languages.first %}
+                                <a href="#"
+                                    class="badge bg-purple-700 border-purple-700 hover:bg-purple-900 text-white ">{{language}}</a>
+                                {% endfor %}
                             </div>
                         </div>
                     </a>
-                    <a href="#"
-                        class="card card-side    bg-base-100 shadow-xl  top-0 hover:-top-1 transition-all duration-150 rounded-none mb-3">
-                        <figure><img class=" h-full object-cover w-32 "
-                                src="https://cdn.dribbble.com/users/3041390/screenshots/15876985/media/c7eb96228a675d04391774498b9cc786.png?compress=1&resize=320x240&vertical=top"
-                                alt="Shoes" /></figure>
-                        <div class="card-body py-2 px-3 space-y-0 gap-1">
-                            <h2 class="card-title py-0 mb-0">
-                                Planet store
-                            </h2>
-                            <p class="text-sm">If a dog chews shoes whose shoes does he choose?</p>
-                            <div class="card-actions justify-start">
-                                <div class="badge badge-outline  bg-green-800  border-green-800 text-white">Django
-                                </div>
-                                <div class="badge badge-outline  bg-green-800  border-green-800 text-white">Python3
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#"
-                        class="card card-side    bg-base-100 shadow-xl  top-0 hover:-top-1 transition-all duration-150 rounded-none mb-3">
-                        <figure><img class=" h-full object-cover w-32 "
-                                src="https://cdn.dribbble.com/users/472201/screenshots/15993980/media/b30b0cd6a97b703a2a5d722223a036be.jpg?compress=1&resize=320x240&vertical=top"
-                                alt="Shoes" /></figure>
-                        <div class="card-body py-2 px-3 space-y-0 gap-1">
-                            <h2 class="card-title py-0 mb-0">
-                                Planet store
-                            </h2>
-                            <p class="text-sm">If a dog chews shoes whose shoes does he choose?</p>
-                            <div class="card-actions justify-start">
-                                <div class="badge badge-outline  bg-green-800  border-green-800 text-white">Django
-                                </div>
-                                <div class="badge badge-outline  bg-green-800  border-green-800 text-white">Python3
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                    {% endfor %}
+                    
                 </div>
 
             </section>
@@ -148,45 +124,46 @@
 
 
 {% block extra_js %}
-    <script type="text/javascript" src="{% static 'js/vendor/viewer.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/vendor/viewer.min.js' %}"></script>
 
-    <script>
-        const viewer = new Viewer(document.getElementById('page-content'), {
-        });
-    </script>
+<script>
+    const viewer = new Viewer(document.getElementById('page-content'), {
+    });
+</script>
 
 
-    {% comment %} <script>
-        const icon_container_name = "icon-area";
-        const project_bio_body_name = "project-bio-content";
+{% comment %}
+<script>
+    const icon_container_name = "icon-area";
+    const project_bio_body_name = "project-bio-content";
 
-        const open_bio_icon = `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus w-5 h-5" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    const open_bio_icon = `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus w-5 h-5" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <line x1="12" y1="5" x2="12" y2="19" />
   <line x1="5" y1="12" x2="19" y2="12" />
 </svg>`
 
-        const close_bio_icon = `
+    const close_bio_icon = `
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus w-5 h-5" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <line x1="5" y1="12" x2="19" y2="12" />
 </svg>`
 
-        function toggle_bio(elem) {
-            var icon_container = elem.getElementsByClassName(icon_container_name)[0];
-            var project_body_elem = elem.getElementsByClassName(project_bio_body_name)[0];
-            if (project_body_elem && icon_container) {
-                if (project_body_elem.classList.contains('hidden')) {
-                    project_body_elem.classList.remove('hidden')
-                    icon_container.innerHTML = close_bio_icon;
-                } else {
-                    project_body_elem.classList.add('hidden')
-                    icon_container.innerHTML = open_bio_icon;
+    function toggle_bio(elem) {
+        var icon_container = elem.getElementsByClassName(icon_container_name)[0];
+        var project_body_elem = elem.getElementsByClassName(project_bio_body_name)[0];
+        if (project_body_elem && icon_container) {
+            if (project_body_elem.classList.contains('hidden')) {
+                project_body_elem.classList.remove('hidden')
+                icon_container.innerHTML = close_bio_icon;
+            } else {
+                project_body_elem.classList.add('hidden')
+                icon_container.innerHTML = open_bio_icon;
 
-                }
             }
         }
-    </script> {% endcomment %}
+    }
+</script> {% endcomment %}
 
-   
+
 {% endblock extra_js %}

@@ -172,11 +172,17 @@ class Project(Page):
             query = query.specific().filter(frameworks__in=project_framework)
 
         if sort_type and sort_type == "old":
-            query = query.specific().order_by('first_published_at')
+            query = query.specific().order_by("first_published_at")
 
         return query
+
+    @staticmethod
+    def get_related_projects(project):
+        projects = Project.objects.live().all().exclude(id=project.id)
+        return projects
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context["page_section"] = "projects"
+        context["related_projects"] = Project.get_related_projects(self)
         return context
