@@ -4,7 +4,7 @@ from .base import *
 from django.core.exceptions import ImproperlyConfigured
 
 
-config_file = "/home/mabbit71/config/portfolio"
+config_file = "/home/coding43/config/portfolio"
 env = environ.Env()
 environ.Env.read_env(os.path.join(config_file, ".env"))
 
