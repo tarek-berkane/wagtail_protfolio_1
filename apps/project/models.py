@@ -35,7 +35,6 @@ class ProjectIndex(RoutablePageMixin, Page):
     # ROUTING
     @route(r"^$")  # will override the default Page serving mechanism
     def current_events(self, request: HttpRequest):
-
         if request.GET:
             form = ProjectForm(request.GET)
             if form.is_valid():
@@ -163,14 +162,17 @@ class Project(Page):
         if text:
             query = query.filter(title__contains=text)
 
-        if project_type and project_type != "any":
+        if project_type and project_type != "-1":
             query = query.specific().filter(project_type__in=project_type)
 
-        if project_language and project_language != "any":
+        if project_language and project_language != "-1":
             query = query.specific().filter(languages__in=project_language)
 
-        if project_framework and project_framework != "any":
+        if project_framework and project_framework != "-1":
             query = query.specific().filter(frameworks__in=project_framework)
+
+        if sort_type and sort_type == "old":
+            query = query.specific().order_by('first_published_at')
 
         return query
 

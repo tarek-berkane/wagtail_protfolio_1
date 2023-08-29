@@ -8,7 +8,7 @@ from wagtail.search.models import Query
 def search(request):
     search_query = request.GET.get('query', None)
     page = request.GET.get('page', 1)
-
+    print("HERE")
     # Search
     if search_query:
         search_results = Page.objects.live().search(search_query)

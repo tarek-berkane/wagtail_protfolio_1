@@ -5,9 +5,8 @@ from apps.category.services import get_frameworks, get_languages, get_project_ty
 
 class ProjectForm(forms.Form):
     SORT_TYPE = (
-        ("D", "Date"),
-        ("P", "Popularty"),
-        ("T", "Trend"),
+        ("new", "New"),
+        ("old", "Old"),
     )
 
     text = forms.CharField(max_length=50, required=False)

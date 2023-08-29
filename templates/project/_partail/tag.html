@@ -5,8 +5,8 @@
     {% endif %}
 {% endwith %}
 
-{% with page.frameworks.first as framework %}
-    {% if framework %}
+{% for framework in page.frameworks.all %}
+    {% comment %} {% if framework %} {% endcomment %}
     <a href="#" class="badge bg-purple-700 border-purple-700 hover:bg-purple-900 text-white ">{{framework}}</a>
-    {% endif %}
-{% endwith %}
+    {% comment %} {% endif %} {% endcomment %}
+{% endfor %}

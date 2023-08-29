@@ -22,7 +22,7 @@ from apps.project.services import get_projects
 
 class Home(Page):
     max_count = 1
-    parent_page_types = []
+    # parent_page_types = []
 
     description = models.TextField(max_length=200)
 
@@ -60,6 +60,7 @@ class Home(Page):
         return context
 
 class About(Page):
+    parent_page_types = ['page.Home',]
 
     salutation = models.CharField(max_length=255)
     sub_title = models.CharField(max_length=255)

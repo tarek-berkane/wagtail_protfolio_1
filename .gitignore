@@ -4,7 +4,7 @@ my_env/
 */settings/__pycache__/
 */migrations/__pycache__/
 */migrations/00*
-/raw-template-media
+raw-template-media/
 
 db.sqlite3
 log/*
