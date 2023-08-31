@@ -1,9 +1,10 @@
 {% load wagtailimages_tags wagtailcore_tags %}
-{% image project.specific.show_image width-300 as tmp_photo %}
+{% image project.specific.show_image width-900 as tmp_photo %}
 
 <a href="{% pageurl project %}"
-class="card card-side md:flex-col   bg-base-100   top-0 hover:-top-2 transition-all duration-150">
-<figure><img class=" h-full object-cover w-32 md:w-full md:h-60"
+class="card card-side md:flex-col   bg-base-100   top-0 hover:-top-2 transition-all duration-150 " style="border: 1px solid rgb(230, 229, 229) !important;box-shadow: 2px 5px 8px rgb(234, 234, 234);
+;">
+<figure><img class=" h-full object-cover w-32 md:w-full md:h-50  "
         src="{{tmp_photo.url}}"
         alt="Shoes" /></figure>
 <div class="card-body py-2 px-3 space-y-0 gap-1">
