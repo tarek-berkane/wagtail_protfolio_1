@@ -105,9 +105,11 @@
                                 <span class="mb-4"></span>
                                 {% endif %}
                                 {% endwith %}
-                                {% for language in page.languages.first %}
-                                <a href="#"
+                                {% with page.languages.first as language %}
+                                    {% if language %}
+                                    <a href="#"
                                     class="badge bg-purple-700 border-purple-700 hover:bg-purple-900 text-white ">{{language}}</a>
+                                    {% endif %}
                                 {% endfor %}
                             </div>
                         </div>
