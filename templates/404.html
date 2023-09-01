@@ -14,20 +14,17 @@
 
 
 
-{% block header %}
-    {% include '_partial/header.html' %}
-{% endblock header %}
 
 <div class="page page-center">
   <div class="container-tight py-4">
-    <div class="empty">
+    <div class="empty"  style="height: 100vh;">
       <div class="empty-header">404</div>
       <p class="empty-title">عفوًا ... الصفحة غير موجودة</p>
       <p class="empty-subtitle text-muted">
           نحن آسفون ولكن الصفحة التي تبحث عنها لم يتم العثور عليها
               </p>
       <div class="empty-action">
-        <a href="{% slugurl 'courses' %}" class="btn btn-primary">
+        <a href="{% slugurl 'home' %}" class="btn btn-primary">
           <!-- Download SVG icon from http://tabler-icons.io/i/arrow-left -->
           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="5" y1="12" x2="19" y2="12"></line><line x1="5" y1="12" x2="11" y2="18"></line><line x1="5" y1="12" x2="11" y2="6"></line></svg>
           عودة إلى الرئيسية          </a>
@@ -36,8 +33,5 @@
   </div>
 </div>
 
-{% block footer %}
-    {% include '_partial/footer.html' %}
-{% endblock footer %}
 
 {% endblock body %}
