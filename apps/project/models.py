@@ -178,7 +178,7 @@ class Project(Page):
 
     @staticmethod
     def get_related_projects(project):
-        projects = Project.objects.live().all().exclude(id=project.id)
+        projects = Project.objects.live().all().exclude(id=project.id)[:4]
         return projects
 
     def get_context(self, request, *args, **kwargs):
