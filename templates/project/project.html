@@ -99,16 +99,15 @@
                             <div class="card-actions justify-start">
                                 {% with page.frameworks.first as framework %}
                                 {% if framework %}
-                                <div class="badge badge-outline  bg-sky-400  border-sky-400 text-white">{{framework}}
-                                </div>
+                                <div class="badge badge-outline  bg-sky-400  border-sky-400 text-white">{{framework}}</div>
                                 {% else %}
                                 <span class="mb-4"></span>
                                 {% endif %}
                                 {% endwith %}
                                 {% with page.languages.first as language %}
                                     {% if language %}
-                                    <a href="#"
-                                    class="badge bg-purple-700 border-purple-700 hover:bg-purple-900 text-white ">{{language}}</a>
+                                    <div href="#"
+                                    class="badge bg-purple-700 border-purple-700 hover:bg-purple-900 text-white ">{{language}}</div>
                                     {% endif %}
                                 {% endwith %}
                             </div>

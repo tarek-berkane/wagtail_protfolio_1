@@ -11,7 +11,7 @@ class="card card-side md:flex-col   bg-base-100   top-0 hover:-top-2 transition-
     <h2 class="card-title py-0 mb-0">
         {{project.title}}
     </h2>
-    <p class="text-sm">If a dog chews shoes whose shoes does he choose?</p>
+    <p class="text-sm">{{project.short_description}}</p>
     <div class="card-actions justify-start">
         {% if project.specific.languages.first %}
             {% with project.specific.languages.first as tag %}
